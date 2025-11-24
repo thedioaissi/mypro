@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "lint": "eslint .",
-    "start": "next start"
+    "dev": "node scripts/check-env.js && next dev",
+    "build": "node scripts/check-env.js && next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "check-env": "node scripts/check-env.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
