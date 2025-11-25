@@ -4,27 +4,24 @@ const nextConfig = {
   output: 'standalone',
   transpilePackages: ['@radix-ui', 'lucide-react'],
   images: {
-    domains: ['localhost', '*.supabase.co'],
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
     ],
+    unoptimized: true,
   },
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
     },
-    serverComponentsExternalPackages: ['@supabase/supabase-js'],
   },
-  // Désactiver le cache pour le débogage
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
-  },
-  // Configuration Webpack personnalisée
+  // Configuration pour désactiver Turbopack
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -35,5 +32,10 @@ const nextConfig = {
     return config;
   },
 };
+
+// Désactiver Turbopack explicitement en mode développement
+if (process.env.NODE_ENV === 'development') {
+  process.env.TURBOPACK = '0';
+}
 
 module.exports = nextConfig;
