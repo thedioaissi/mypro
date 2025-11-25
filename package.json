@@ -9,8 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "type-check": "tsc --noEmit",
-    "check-env": "node scripts/check-env.js",
-    "prepare": "husky install"
+    "check-env": "node scripts/check-env.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
